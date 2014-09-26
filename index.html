@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>VueTodo</title>
+    <script src="vue.min.js"></script>
+    <style>
+      .done-true {
+        text-decoration: line-through;
+        color: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Angular Todo</h2>
+    <div id="todo">
+      <li v-repeat="todos">
+        <!--通常表示するビュー-->
+        <div v-show="!editing" v-on="click: editTodo(this)">
+          {{content}}
+        </div>
+        <!--編集時に表示するビュー-->
+        <div v-show="editing">
+          <input type="text" v-model="content">
+        </div>
+      </li>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
+
