@@ -12,19 +12,26 @@
     </style>
   </head>
   <body>
-    <h2>Angular Todo</h2>
+    <h2>Vue.js Todo</h2>
     <div id="todo">
-      <li v-repeat="todos">
-        <!--通常表示するビュー-->
-        <div v-show="!editing" v-on="click: editTodo(this)">
-          {{content}}
-        </div>
-        <!--編集時に表示するビュー-->
-        <div v-show="editing">
-          <input type="text" v-model="content">
-        </div>
+        <input type="text" v-model="new_content">
+        <button v-on="click: newTodo">New</button>
+      <li v-repeat="todos" v-component="todo" v-with="editingTodo : editingTodo">
       </li>
     </div>
+    <script type="text/x-template" id="todo-template">
+      <!--通常表示するビュー-->
+      <div v-show="this != editingTodo" v-on="click: editTodo(this)">
+        {{content}}
+      </div>
+      <!--編集時に表示するビュー-->
+      <div v-show="this == editingTodo">
+        <input type="text" v-model="content | nameValidator" v-todo-focus="this == editingTodo" v-on="blur : editedTodo(this)">
+      </div>
+      <li v-show="!validation.content">Content cannot be empty.</li>
+    </script>
+    <script src="store.js"></script>
+    <script src="validators.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

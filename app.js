@@ -1,27 +1,69 @@
+Vue.component('todo', {
+    template: '#todo-template',
+    directives: {
+        'todo-focus': function (value) {
+            if (!value) {
+                return;
+            }
+            var el = this.el;
+            setTimeout(function () {
+                el.focus();
+            }, 0);
+        }
+    },
+    computed: {
+        isValid: function () {
+            var valid = true
+            for (var key in this.validation) {
+                if (!this.validation[key]) {
+                    valid = false
+                }
+            }
+            return valid
+        }
+    },
+    data: {
+        validation : {
+            content : false
+        }
+    },
+    filters: validators,
+    methods: {
+       // ToDo の編集開始
+        editTodo : function(item) {
+            this.editingTodo = item;
+        },
+        editedTodo: function(item){
+
+            if (this.isValid) {
+                this.editingTodo = null;
+            }
+        }
+    }
+ 
+});
+
 var vm = new Vue({
     el: '#todo',
+    created: function (){
+        todoStorage.fetch();
+    },
+    // ready hook, watch todos change for data persistence
+    ready: function () {
+        this.$watch('todos', function (todos) {
+                todoStorage.save(todos);
+        });
+    },
     data: {
-        todos: [
-            {
-                done: true,
-                content: 'Learn JavaScript',
-                editing: false
-            },
-            {
-                done: false,
-                content: 'Learn Vue.js',
-                editing: false
-            }
-        ]
+        todos:  [] ,
+        editingTodo: null,
+        new_content : ""
     },
     methods: {
-        // ToDo の編集開始
-        editTodo : function(item) {
-          item.editing = true;
+        newTodo : function(){
+            this.todos.push ({done:false, content: this.new_content});
+            this.new_content = "";
         }
-        
     }
-})
-
-
+});
 
