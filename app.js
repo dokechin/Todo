@@ -37,9 +37,9 @@ Vue.component('todo', {
         },
         editedTodo: function(item){
 
-            if (this.isValid) {
+//            if (this.isValid) {
                 this.editingTodo = null;
-            }
+//            }
         }
     }
  

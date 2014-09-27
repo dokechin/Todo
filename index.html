@@ -22,7 +22,7 @@
     <script type="text/x-template" id="todo-template">
       <!--通常表示するビュー-->
       <div v-show="this != editingTodo" v-on="click: editTodo(this)">
-        {{name}}
+        {{ $index }}{{name}}
       </div>
       <!--編集時に表示するビュー-->
       <div v-show="this == editingTodo">

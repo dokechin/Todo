@@ -3,6 +3,7 @@ var validators = (function () {
     return {
         nameValidator: function (val) {
             this.validation.name = !!val
+            console.log("validators" + val + !!val);
             return val
         },
         emailValidator: function (val) {
