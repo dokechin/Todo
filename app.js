@@ -24,7 +24,7 @@ Vue.component('todo', {
     },
     data: {
         validation : {
-            content : false
+            name : false
         }
     },
     filters: validators,
@@ -44,7 +44,7 @@ Vue.component('todo', {
 });
 
 var vm = new Vue({
-    el: '#todo',
+    el: '#todos',
     created: function (){
         todoStorage.fetch();
     },
@@ -57,12 +57,12 @@ var vm = new Vue({
     data: {
         todos:  [] ,
         editingTodo: null,
-        new_content : ""
+        new_name : ""
     },
     methods: {
         newTodo : function(){
-            this.todos.push ({done:false, content: this.new_content});
-            this.new_content = "";
+            this.todos.push ({done:false, name: this.new_name});
+            this.new_name = "";
         }
     }
 });

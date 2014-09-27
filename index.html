@@ -13,8 +13,8 @@
   </head>
   <body>
     <h2>Vue.js Todo</h2>
-    <div id="todo">
-        <input type="text" v-model="new_content">
+    <div id="todos">
+        <input type="text" v-model="new_name">
         <button v-on="click: newTodo">New</button>
       <li v-repeat="todos" v-component="todo" v-with="editingTodo : editingTodo">
       </li>
@@ -22,13 +22,13 @@
     <script type="text/x-template" id="todo-template">
       <!--通常表示するビュー-->
       <div v-show="this != editingTodo" v-on="click: editTodo(this)">
-        {{content}}
+        {{name}}
       </div>
       <!--編集時に表示するビュー-->
       <div v-show="this == editingTodo">
-        <input type="text" v-model="content | nameValidator" v-todo-focus="this == editingTodo" v-on="blur : editedTodo(this)">
+        <input type="text" v-model="name | nameValidator" v-todo-focus="this == editingTodo" v-on="blur : editedTodo(this)">
       </div>
-      <li v-show="!validation.content">Content cannot be empty.</li>
+      <li v-show="!validation.name">Content cannot be empty.</li>
     </script>
     <script src="store.js"></script>
     <script src="validators.js"></script>
