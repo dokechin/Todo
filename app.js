@@ -31,7 +31,9 @@ Vue.component('todo', {
     methods: {
        // ToDo ÇÃï“èWäJén
         editTodo : function(item) {
-            this.editingTodo = item;
+            if (this.editingTodo == null){
+                this.editingTodo = item;
+            }
         },
         editedTodo: function(item){
 
