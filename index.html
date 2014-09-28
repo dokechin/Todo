@@ -22,13 +22,13 @@
     <script type="text/x-template" id="todo-template">
       <!--通常表示するビュー-->
       <div v-show="this != editingTodo" v-on="click: editTodo(this)">
-        {{ $index }}{{name}}
+        {{ $index }}{{name}}{{validation.name}}
       </div>
       <!--編集時に表示するビュー-->
       <div v-show="this == editingTodo">
-        <input type="text" v-model="name | nameValidator" v-todo-focus="this == editingTodo" v-on="blur : editedTodo(this)">
+        <input type="text" v-model="name | nameValidator"  v-on="blur : editedTodo(this)">
       </div>
-      <li v-show="!validation.name">{{ $index }}Content cannot be empty.</li>
+      <li v-show="!validation.name">{{ $index }}{{ name }}Content cannot be empty.</li>
     </script>
     <script src="store.js"></script>
     <script src="validators.js"></script>
