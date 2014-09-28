@@ -1,5 +1,6 @@
-Vue.use('vue-validator');
-
+var Vue = require('vue'),
+    validator = require('vue-validator')
+Vue.use(validator)
 Vue.component('todo', {
     template: '#todo-template',
     directives: {
