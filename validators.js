@@ -3,11 +3,12 @@ var validators = (function () {
     return {
         nameValidator: function (val) {
             this.validation.name = !!val;
+            console.log( this.name);
             console.log("validators" + val + !!val);
             return val
         },
         emailValidator: function (val) {
-            this.validation.email = emailRE.test(val)
+            this.$data.validation.email = emailRE.test(val)
             return val
         }
     }
