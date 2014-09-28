@@ -4,19 +4,6 @@
     <meta charset="utf-8">
     <title>VueTodo</title>
     <script src="vue.min.js"></script>
-    <script src="validators.js"></script>
-    <script type="text/x-template" id="todo-template">
-      <!--通常表示するビュー-->
-      <div v-show="this != editingTodo" v-on="click: editTodo(this)">
-        {{ $index }}{{name}}
-      </div>
-      <!--編集時に表示するビュー-->
-      <div v-show="this == editingTodo">
-        <input type="text" v-model="name | nameValidator"  v-on="blur : editedTodo(this)">
-      </div>
-      <li v-show="!validation.name">{{ $index }}Content cannot be empty.</li>
-    </script>
-    <script src="component.js"></script>
     <style>
       .done-true {
         text-decoration: line-through;
@@ -27,12 +14,24 @@
   <body>
     <h2>Vue.js Todo</h2>
     <div id="todos">
-        <input type="text" v-model="new_name">
+        <input type="text" v-model="new_name" v-on="keyup:newTodo | key enter">
         <button v-on="click: newTodo">New</button>
-      <li v-repeat="todos" v-component="todo" v-with="editingTodo : editingTodo">
+      <li v-repeat="todos" v-component="todo" v-with="editingTodo : editing.todo">
       </li>
     </div>
+    <script type="text/x-template" id="todo-template">
+      <!--通常表示するビュー-->
+      <div v-show="this != editingTodo" v-on="click: editTodo(this)">
+        {{name}}
+      </div>
+      <!--編集時に表示するビュー-->
+      <div v-show="this == editingTodo">
+        <input type="text" v-model="name | nameValidator"  v-on="blur : editedTodo(this)">
+      </div>
+      <li v-show="!validation.name">Content cannot be empty.</li>
+    </script>
     <script src="store.js"></script>
+    <script src="validators.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
