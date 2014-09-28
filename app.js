@@ -1,3 +1,5 @@
+Vue.use('vue-validator');
+
 Vue.component('todo', {
     template: '#todo-template',
     directives: {
@@ -27,7 +29,13 @@ Vue.component('todo', {
             name : false
         }
     },
-    filters: validators,
+    filters: {
+        nameValidator: function (val) {
+            this.validation.name = !!val;
+            console.log("validators" + val + !!val);
+            return val
+        }
+    },
     methods: {
        // ToDo ÇÃï“èWäJén
         editTodo : function(item) {

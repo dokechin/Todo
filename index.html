@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>VueTodo</title>
     <script src="vue.min.js"></script>
+    <script src="vue-validator.js"></script>
     <style>
       .done-true {
         text-decoration: line-through;
@@ -25,13 +26,12 @@
         {{ $index }}{{name}}{{validation.name}}
       </div>
       <!--編集時に表示するビュー-->
-      <div v-show="this == editingTodo">
-        <input type="text" v-model="name | nameValidator"  v-on="blur : editedTodo(this)">
+      <div v-show="this == editingTodo" v-validate>
+        <input type="text" v-model="name | required"  v-on="blur : editedTodo(this)">
       </div>
-      <li v-show="!validation.name">{{ $index }}{{ name }}Content cannot be empty.</li>
+      <li v-show="$validation.name.required">{{ $index }}{{ name }}Content cannot be empty.</li>
     </script>
     <script src="store.js"></script>
-    <script src="validators.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
